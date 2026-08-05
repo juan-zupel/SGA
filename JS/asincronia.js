@@ -59,3 +59,11 @@
 // console.log("El usuario puede seguir navegando");
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+console.log("Solicitando lista de alumnos");
+setTimeout(() => {
+    console.log("Lista recibida.")
+}, 5000);
+setTimeout(() => {
+    console.log("Mientras tanto el programa sigue ejecutandose...");
+}, 400);
