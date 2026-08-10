@@ -32,7 +32,7 @@
 
 // iniciar();
 
-
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Crear obtenerMaterias() y obtenerDocentes() para luego mostrar los datos a travez de async/await
 
@@ -60,3 +60,65 @@
 // }
 
 // iniciar();
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+async function cargarAlumnos() {
+    const respuesta = await fetch("https://jsonplaceholder.typicode.com/users");
+    const alumnos = await respuesta.json();
+    console.log(alumnos);
+    return alumnos;
+}
+
+function mostrarAlumnos(alumnos) {
+    // console.table(alumnos);
+    console.log(typeof alumnos);
+    localStorage.setItem("alumnos", JSON.stringify(alumnos));
+    const datos = localStorage.getItem("alumnos");
+    console.log(typeof datos);
+    console.log(datos);
+    const alumnosRecuperados = JSON.parse(datos);
+    console.log(typeof(alumnosRecuperados));
+    console.log(alumnosRecuperados);
+    console.table(alumnosRecuperados);
+}
+
+async function iniciar() {
+    const alumnos = await cargarAlumnos();
+    mostrarAlumnos(alumnos);
+}
+
+iniciar();
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// post y coments = id, titulo, usuario
+
+// async function post() {
+//     const respuesta = await fetch("https://jsonplaceholder.typicode.com/posts")
+//         const info= await respuesta.json()
+//     return info;
+    
+// }
+
+// async function comments(){
+//  const respuesta= await fetch("https://jsonplaceholder.typicode.com/comments")
+//  const info = await respuesta.json()
+//  return info;
+// }
+// function mostrar (info){
+//     console.table(info)
+//     for(const element of info){
+//         console.log(element.id+"||"+element.name)
+//     }
+// info.forEach((element) => {
+    
+// });
+// }
+//  async function iniciar() {
+//     const info = await comments()
+//     mostrar(info)   
+//  }
+//  iniciar()
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
