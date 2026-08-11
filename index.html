@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="JS/alumnos.js"></script>
+    <script src="JS/alumnos.js" defer></script>
     <title>SGA</title>
 </head>
 <body>
     <h1>Sistema de Gestion Académica</h1>
-    <p>Proyecto de programación 4</p>
+    <h2>Alta de Alumno</h2>
+    <form id="formAlumno">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre"><br><br>
+
+        <label for="carrera">Carrera</label>
+        <input type="text" id="carrera"><br><br>
+
+        <label for="email">Email</label>
+        <input type="email" id="email"><br><br>
+
+        <button type="submit">Guardar</button>
+        <ul id="listaAlumnos"></ul>
+    </form>
 </body>
 </html>
