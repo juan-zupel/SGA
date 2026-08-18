@@ -1,6 +1,7 @@
 
 const formulario = document.querySelector("#formAlumno");
 const mensaje = document.querySelector("#mensaje");
+const listaAlumnos = document.querySelector("#listaAlumnos");
 let alumnoEditandoId = null;
 
 
@@ -27,7 +28,6 @@ formulario.addEventListener("submit", function (event) {
     }
 
     const alumnos = obteneralumnos();
-    const listaAlumnos = document.querySelector("#listaAlumnos");
 
     if (alumnoEditandoId === null) {
         const alumno = {
@@ -81,12 +81,16 @@ function mostrarAlumnos(alumnos) {
     for (const alumno of alumnos) {
         listaAlumnos.innerHTML += `
         <tr>
-            <td> ${alumno.nombre}<td/>
-            <td> ${alumno.carrera}<td/>
-            <td> ${alumno.correo} <td/>
+            <td>${alumno.nombre}<td/>
+            <td>${alumno.carrera}<td/>
+            <td>${alumno.correo} <td/>
             <td> 
-               <button class="btn-editar" data-id="${alumno.id}">Editar</button>
-               <button class="btn-eliminar" data-id="${alumno.id}">Eliminar</button>
+                <button class="btn-editar" data-id="${alumno.id}" title="Editar alumno">
+                    <i class= "fa-solid fa-pen"></i>
+                </button>
+                <button class="btn-eliminar" data-id="${alumno.id}" title="Eliminar alumno">
+                    <i class= "fa-solid fa-trash"></i>
+                </button>
             </td>
         </tr>
         `;
@@ -98,13 +102,23 @@ function eliminarAlumno(id) {
     const alumnosActuales = alumnos.filter(alumno => alumno.id != id);
     localStorage.setItem("alumnos", JSON.stringify(alumnosActuales));
     mostrarAlumnos(alumnosActuales);
+    if(alumnoEditandoId === id) {
+        formulario.reset;
+        alumnoEditandoId = null;
+        formulario.querySelector("button").textContent = "Guardar Alumno";
+    }
     mostrarmensaje("Alumno eliminado", "mje-exito");
 }
 
 listaAlumnos.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn-eliminar")) {
-        const id = Number(e.target.dataset.id)
-        eliminarAlumno(id)
+    const boton_el = e.target.closest(".btn-eliminar");
+    if ("btn-eliminar") {
+        const id = Number(boton_el.dataset.id);
+        const confirmar = confirm("¿Estas seguro de eliminar este alumno?");
+        if(confirmar) {
+            eliminarAlumno(id);
+        }
+        
     }
 })
 
@@ -118,12 +132,14 @@ function editarAlumno(id) {
     document.querySelector("#correo").value = alumno.correo;
     alumnoEditandoId = id;
     formulario.querySelector("button").textContent = "Actualizar alumno"
+    document.querySelector("#nombre").focus();
 }
 
 listaAlumnos.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn-editar")) {
-        const id = Number(e.target.dataset.id)
-        editarAlumno(id)
+    const boton_ed = e.target.closest(".btn-editar");
+    if ("btn-editar") {
+        const id = Number(boton_ed.dataset.id);
+        editarAlumno(id);
     }
 })
 

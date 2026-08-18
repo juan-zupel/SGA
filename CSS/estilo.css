@@ -1,3 +1,4 @@
+
 *{
     box-sizing: border-box;
 }
@@ -48,6 +49,35 @@ button{
     cursor: pointer;
 }
 
+.btn-editar, .btn-eliminar {
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 3px;
+    font-size: 14px;
+}
+
+.btn-editar {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.btn-editar:hover {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.btn-eliminar {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.btn-eliminar:hover {
+    background-color: #b41a09;
+    color: white;
+}
+
 form button{
     margin-top: 10px;
 }
@@ -68,21 +98,21 @@ th{
    
 }
 
-.mje-exito{
+.oculto {
+    display: none;
+}
+
+.mje-exito {
     position: fixed;
-    font-weight: bold;
     top: 20px;
     right: 20px;
     padding: 15px 20px;
     border-radius: 8px;
-    background-color: #d1fae5;
-    color: #166534;
+    font-weight: bold;
+    background-color: lightgreen;
+    color: darkgreen;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     z-index: 1000;
-}
-
-.oculto{
-    display: none;
 }
 
 .mje-error{
@@ -92,7 +122,7 @@ th{
     padding: 15px 20px;
     border-radius: 8px;
     font-weight: bold;
-    color: #fee2e2;
+    background-color: #fee2e2;
     color: #991b1b;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
     z-index: 1000;
