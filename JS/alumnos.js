@@ -6,7 +6,7 @@ let alumnoEditandoId = null;
 
 
 formulario.addEventListener("submit", function (event) {
-    event.preventDefault()
+    event.preventDefault();
 
     const nombre = document.querySelector("#nombre").value.trim();
     const carrera = document.querySelector("#carrera").value.trim();
@@ -85,10 +85,10 @@ function mostrarAlumnos(alumnos) {
             <td>${alumno.carrera}<td/>
             <td>${alumno.correo} <td/>
             <td> 
-                <button class="btn-editar" data-id="${alumno.id}" title="Editar alumno">
+                <button class="btn-editar" data-id="${alumno.id}" title="Editar Alumno">
                     <i class= "fa-solid fa-pen"></i>
                 </button>
-                <button class="btn-eliminar" data-id="${alumno.id}" title="Eliminar alumno">
+                <button class="btn-eliminar" data-id="${alumno.id}" title="Eliminar Alumno">
                     <i class= "fa-solid fa-trash"></i>
                 </button>
             </td>

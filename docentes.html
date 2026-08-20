@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="JS/alumnos.js" defer></script>
+    <script src="JS/docentes.js" defer></script>
+    <link rel="stylesheet" href="CSS/estilo.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <header>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="altas.html">Alumnos</a>
+        <a href="docentes.html">Docentes</a>
+      </nav>
+    </header>
+          <section class="formulario-2">
+        <h2>Alta de Docente</h2>
+        <form id="formDocente">
+          <label for="nombreD">Nombre</label>
+          <input type="text" id="nombreD" /><br /><br />
+
+          <label for="especialidad">Especialidad</label>
+          <input type="text" id="especialidad" /><br /><br />
+
+          <label for="correoD">Correo</label>
+          <input type="text" id="correoD" /><br /><br />
+
+          <button type="submit">Registrar Docente</button>
+        </form>
+        <!-- <p id="mensaje" class="oculto"></p> -->
+      </section>
+
+      <section class="docentes">
+        <h2>Docentes Registrados</h2>
+        <p id="cantidaddocentes"></p>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Especialidad</th>
+              <th>Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="listaDocentes">
+
+          </tbody>
+        </table>
+      </section>
+    </main>
+</body>
+</html>
