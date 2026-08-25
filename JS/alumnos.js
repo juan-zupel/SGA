@@ -46,27 +46,17 @@ formulario.addEventListener("submit", function (event) {
 
         mostrarMensaje("Alumno actualizado correctamente", "mje-exito")
     }
-    // localStorage.setItem("alumnos", JSON.stringify(alumnos))
+    
+    guardarDatos("alumnos", alumnos)
+
     mostraAlumnos(alumnos)
+
     formulario.reset()
 });
 
 
 function obtenerAlumnos() {
-    const datos = localStorage.getItem("alumnos")
-    if (datos) {
-        return JSON.parse(datos)
-    }
-    return []
-}
-
-function mostrarMensaje(texto, clase) {
-    mensaje.textContent = texto;
-    mensaje.className = `mensaje ${clase}`
-    mensaje.style.display = "block"
-    setTimeout(() => {
-        mensaje.style.display = "none"
-    }, 3000);
+    return obtenerDatos("alumnos")
 }
 
 function mostraAlumnos(alumnos) {
