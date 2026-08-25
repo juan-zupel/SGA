@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="JS/docentes.js" defer></script>
-    <link rel="stylesheet" href="CSS/estilo.css" />
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <title>Document</title>
-</head>
-<body>
-    <main>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="CSS/estilos.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <script src="JS/docentes.js" defer></script>
+        <title>SGA - Docentes</title>
+    </head>
+    <body>
         <header>
-      <nav>
-        <a href="index.html">Inicio</a>
-        <a href="alumnos.html">Alumnos</a>
-        <a href="docentes.html">Docentes</a>
-      </nav>
-    </header>
-          <section class="formulario-2">
-        <h2>Alta de Docente</h2>
-        <form id="formDocente">
-          <label for="nombreD">Nombre</label>
-          <input type="text" id="nombreD" /><br /><br />
-
-          <label for="especialidad">Especialidad</label>
-          <input type="text" id="especialidad" /><br /><br />
-
-          <label for="correoD">Correo</label>
-          <input type="text" id="correoD" /><br /><br />
-
-          <button type="submit">Registrar Docente</button>
-        </form>
-        <p id="mensaje" class="oculto"></p>
-      </section>
-
-      <section class="docentes">
-        <h2>Docentes Registrados</h2>
-        <p id="cantidaddocentes"></p>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Especialidad</th>
-              <th>Correo</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="listaDocentes">
-
-          </tbody>
-        </table>
-      </section>
-    </main>
-</body>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="alumnos.html">Alumnos</a>
+                <a href="docentes.html">Docentes</a>
+            </nav>
+        </header>
+        <main>
+            <h1>Gestión de Docentes</h1>
+            <section class="formulario-container">
+                <h2>Alta de Docentes</h2>
+                <form id="formulario">
+                    <div class="campo">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre">
+                    </div>
+                    <div class="campo">
+                        <label for="especialidad">Especialidad</label>
+                        <input type="text" id="especialidad">
+                    </div>
+                    <div class="campo">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="texto" id="correo">
+                    </div>
+                    <button type="submit">Guardar Docente</button>
+                </form>
+            </section>
+            <section class="lista-container">
+                <h2>Docentes registrados</h2>
+                <!-- <p id="cantidadAlumnos"></p> -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Especialidad</th>
+                            <th>Correo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaDocentes"></tbody>
+                </table>
+            </section>
+            <div id="mensaje" class="mensaje"></div>
+        </main>
+    </body>
 </html>

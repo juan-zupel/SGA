@@ -1,33 +1,31 @@
-
-const formulario = document.querySelector("#formAlumno");
-const mensaje = document.querySelector("#mensaje");
-const listaAlumnos = document.querySelector("#listaAlumnos");
-let alumnoEditandoId = null;
-
+const formulario = document.querySelector("#formulario")
+const mensaje = document.querySelector("#mensaje")
+const listaAlumnos = document.querySelector("#listaAlumnos")
+let alumnoEditandoId = null
 
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const nombre = document.querySelector("#nombre").value.trim();
-    const carrera = document.querySelector("#carrera").value.trim();
-    const correo = document.querySelector("#correo").value.trim();
+    const nombre = document.querySelector("#nombre").value.trim()
+    const carrera = document.querySelector("#carrera").value.trim()
+    const correo = document.querySelector("#correo").value.trim()
 
-    if(nombre === "" || carrera === "" || correo === "") {
-        mostrarmensaje("Todos los campos son obligatorios", "mje-error");
+    if (nombre === "" || carrera === "" || correo === "") {
+        mostrarMensaje("Todos los campos son obligatorios", "mje-error")
         return
     }
 
-    if(!correo.includes("@")) {
-        mostrarmensaje("Ingrese un correo electrónico valido", "mje-error");
+    if (!correo.includes("@")) {
+        mostrarMensaje("Ingrese un correo electrónico válido", "mje-error")
         return
     }
 
-    if(nombre.length < 3) {
-        mostrarmensaje("El nombre debe tener por lo menos 3 caracteres", "mje-error");
+    if (nombre.length < 3) {
+        mostrarMensaje("El nombre debe tener al menos 3 caracteres", "mje-error")
         return
     }
 
-    const alumnos = obteneralumnos();
+    const alumnos = obtenerAlumnos()
 
     if (alumnoEditandoId === null) {
         const alumno = {
@@ -35,113 +33,110 @@ formulario.addEventListener("submit", function (event) {
             nombre: nombre,
             carrera: carrera,
             correo: correo
-        };
+        }
         alumnos.push(alumno)
-        mostrarmensaje("Alumno guardado correctamente", "mje-exito");
-    }else{
-        const alumno = alumnos.find(alumno => alumno.id === alumnoEditandoId);
-        alumno.nombre = nombre;
-        alumno.carrera = carrera;
-        alumno.correo = correo;
-        alumnoEditandoId = null;
-        formulario.querySelector("button").textContent = "Guardar Alumno";
+        mostrarMensaje("Alumno guardado correctamente", "mje-exito")
+    } else {
+        const alumno = alumnos.find(alumno => alumno.id === alumnoEditandoId)
+        alumno.nombre = nombre
+        alumno.carrera = carrera
+        alumno.correo = correo
+        alumnoEditandoId = null
+        formulario.querySelector("button").textContent = "Guardar Alumno"
 
-        mostrarmensaje("Alumno actualizado correctamente", "mje-exito");
+        mostrarMensaje("Alumno actualizado correctamente", "mje-exito")
     }
-
-    localStorage.setItem("alumnos", JSON.stringify(alumnos))
-
-    mostrarmensaje("Alumno guardado")
-
-    mostrarAlumnos(alumnos)
-
+    // localStorage.setItem("alumnos", JSON.stringify(alumnos))
+    mostraAlumnos(alumnos)
     formulario.reset()
 });
 
-function obteneralumnos() {
+
+function obtenerAlumnos() {
     const datos = localStorage.getItem("alumnos")
     if (datos) {
         return JSON.parse(datos)
     }
     return []
-
 }
 
-function mostrarmensaje(texto, tipo) {
+function mostrarMensaje(texto, clase) {
     mensaje.textContent = texto;
-    mensaje.className = tipo;
+    mensaje.className = `mensaje ${clase}`
+    mensaje.style.display = "block"
     setTimeout(() => {
-        mensaje.textContent = " ";
-        mensaje.className = "oculto";
+        mensaje.style.display = "none"
     }, 3000);
 }
 
-function mostrarAlumnos(alumnos) {
+function mostraAlumnos(alumnos) {
     listaAlumnos.innerHTML = ""
     for (const alumno of alumnos) {
         listaAlumnos.innerHTML += `
         <tr>
-            <td>${alumno.nombre}<td/>
-            <td>${alumno.carrera}<td/>
-            <td>${alumno.correo} <td/>
-            <td> 
-                <button class="btn-editar" data-id="${alumno.id}" title="Editar Alumno">
-                    <i class= "fa-solid fa-pen"></i>
+            <td>${alumno.id}</td>
+            <td>${alumno.nombre}</td>
+            <td>${alumno.carrera}</td>
+            <td>${alumno.correo}</td>
+            <td>
+                <button 
+                class="btn-editar" 
+                data-id="${alumno.id}"
+                title="Editar alumno">
+                <i class="fa-solid fa-pen"></i>
                 </button>
-                <button class="btn-eliminar" data-id="${alumno.id}" title="Eliminar Alumno">
-                    <i class= "fa-solid fa-trash"></i>
+                <button 
+                class="btn-eliminar" 
+                data-id="${alumno.id}"
+                title="Eliminar alumno">
+                <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
         `;
     }
 }
-
 function eliminarAlumno(id) {
-    const alumnos = obteneralumnos()
-    const alumnosActuales = alumnos.filter(alumno => alumno.id != id);
-    localStorage.setItem("alumnos", JSON.stringify(alumnosActuales));
-    mostrarAlumnos(alumnosActuales);
-    if(alumnoEditandoId === id) {
-        formulario.reset;
-        alumnoEditandoId = null;
-        formulario.querySelector("button").textContent = "Guardar Alumno";
+    const alumnos = obtenerAlumnos()
+    const alumnosActualizados = alumnos.filter(
+        alumno => alumno.id !== id
+    );
+    localStorage.setItem("alumnos", JSON.stringify(alumnosActualizados))
+    mostraAlumnos(alumnosActualizados)
+    if (alumnoEditandoId === id){
+        formulario.reset()
+        alumnoEditandoId = null
+        formulario.querySelector("button").textContent = "Guardar alumno"
     }
-    mostrarmensaje("Alumno eliminado", "mje-exito");
+    mostrarMensaje("Alumno eliminado correctamente", "mje-exito")
 }
 
 listaAlumnos.addEventListener("click", (e) => {
-    const boton_el = e.target.closest(".btn-eliminar");
-    if ("btn-eliminar") {
-        const id = Number(boton_el.dataset.id);
-        const confirmar = confirm("¿Estas seguro de eliminar este alumno?");
-        if(confirmar) {
-            eliminarAlumno(id);
+    const boton_el = e.target.closest(".btn-eliminar")
+    if (boton_el) {
+        const id = Number(boton_el.dataset.id)
+        const confirmar = confirm("¿Está seguro de eliminar este alumno?")
+        if (confirmar) {
+        eliminarAlumno(id)
         }
-        
+    }
+    const boton_ed = e.target.closest(".btn-editar")
+    if (boton_ed) {
+        const id = Number(boton_ed.dataset.id)
+        editarAlumno(id)
     }
 })
 
 function editarAlumno(id) {
-    //obtener alumnos
-    const alumnos = obteneralumnos();
-    //filtrar alumnos
+    const alumnos = obtenerAlumnos()
     const alumno = alumnos.find(alumno => alumno.id === id)
     document.querySelector("#nombre").value = alumno.nombre;
     document.querySelector("#carrera").value = alumno.carrera;
     document.querySelector("#correo").value = alumno.correo;
     alumnoEditandoId = id;
-    formulario.querySelector("button").textContent = "Actualizar alumno"
-    document.querySelector("#nombre").focus();
+    formulario.querySelector("button").textContent = "Actualizar Alumno"
+    document.querySelector("#nombre").focus()
 }
 
-listaAlumnos.addEventListener("click", (e) => {
-    const boton_ed = e.target.closest(".btn-editar");
-    if ("btn-editar") {
-        const id = Number(boton_ed.dataset.id);
-        editarAlumno(id);
-    }
-})
-
-const alumnos = obteneralumnos();
-mostrarAlumnos(alumnos);
+const alumnos = obtenerAlumnos()
+mostraAlumnos(alumnos)  
