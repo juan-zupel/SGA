@@ -1,72 +1,9 @@
-// const formulario = document.getElementById("formDocente");          // Contiene el formulario entero
-// const listaDocentes = document.getElementById("listaDocentes");     // Contiene la tabla donde se mostrarán los docentes
-// let localExistenete = null;
-
-// formulario.addEventListener("submit", function (event) {
-//     event.preventDefault();
-
-//     // Variables que contienen los datos ingresados por los usuarios
-//     const nombre = document.getElementById("nombreD").value.trim();
-//     const especialidad = document.getElementById("especialidad").value.trim();
-//     const correo = document.getElementById("correoD").value.trim();
-
-//     // Array que contiene los del LocalStorage
-//     const datos = obtenerDocentes();
-
-//     // Crea un objeto con los datos ingresados por el usuario y lo añado a la constante datos
-//     const doc = {
-//         id: Date.now(),
-//         nombre: nombre,
-//         especialidad: especialidad,
-//         correo: correo
-//     };
-//     const docentes = datos.push(doc)
-
-//     localStorage.setItem("docentes", JSON.stringify(docentes));
-    
-//     // mostrarEnTabla(datos);
-
-//     formulario.reset();
-// });
-
-// function obtenerDocentes() {
-//     const data = localStorage.getItem("docentes");
-//     if (data) {
-//         return JSON.parse(data);
-//     }
-//     return [];
-// }
-
-// function mostrarEnTabla(docente) {
-//     listaDocentes.innerHTML = "";
-//     for (const d of docente) {
-//         listaDocentes.innerHTML =
-//             `
-//     <tr>
-//         <td>${d.id}</td>
-//         <td>${d.nombre}</td>
-//         <td>${d.especialidad}</td>
-//         <td>${d.correo}</td>
-//         <td>
-//             <button class="btn-editar" data-id="${d.id}" title="Editar Docente">
-//                 <i class= "fa-solid fa-pen"></i>
-//             </button>
-//         </td>
-//         <td>
-//             <button class="btn-eliminar" data-id="${d.id}" title="Eliminar Docente">
-//                 <i class= "fa-solid fa-trash"></i>
-//             </button>
-//         </td>
-//     </tr>
-//     `
-//     }
-// }
-
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 const formulario = document.querySelector("#formulario")
 const listaDocentes = document.querySelector("#listaDocentes")
+const btnCancelar = document.querySelector(".btn-cancelar")
 let docenteEditandoId = null
+let docenteEditar = null
+let bandera = 0
 
 formulario.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -102,21 +39,55 @@ formulario.addEventListener("submit", function (event) {
         docentes.push(docente)
         mostrarMensaje("Docente guardado correctamente", "mje-exito")
     } else {
-        const docente = docentes.find(docente => docente.id === docenteEditandoId)
-        docente.nombre = nombre
-        docente.especialidad = especialidad
-        docente.correo = correo
-        docenteEditandoId = null
-        formulario.querySelector("button").textContent = "Guardar Docente"
+        if (bandera === 1) {
+            const docente = docentes.find(docente => docente.id === docenteEditandoId)
+            docente.nombre = docenteEditar.nombre
+            docente.especialidad = docenteEditar.especialidad
+            docente.correo = docenteEditar.correo
+        } else {
+            const docente = docentes.find(docente => docente.id === docenteEditandoId)
+            docente.nombre = nombre
+            docente.especialidad = especialidad
+            docente.correo = correo
+        }
 
+        const datosActuales = {
+            nombre: nombre,
+            especialidad: especialidad,
+            correo: correo
+        }
+
+        if (datosActuales.nombre === docenteEditar.nombre &&
+            datosActuales.especialidad === docenteEditar.especialidad &&
+            datosActuales.correo === docenteEditar.correo) {
+            if (bandera === 1) {
+                mostrarMensaje("Edición cancelada", "mje-exito")
+                return
+            }
+            mostrarMensaje("No se realizaron cambios", "mje-error");
+            return
+        }
+        
         mostrarMensaje("Docente actualizado correctamente", "mje-exito")
+
+        docenteEditandoId = null
+        docenteEditar = null
+        btnCancelar.style.display = "none"
+        formulario.querySelector("button").textContent = "Guardar Docente"
     }
-    // localStorage.setItem("docentes", JSON.stringify(docentes))
     guardarDatos("docentes", docentes)
+
+    bandera = 0
+
     mostraDocentes(docentes)
+
     formulario.reset()
 });
 
+btnCancelar.addEventListener("click", function () {
+    bandera = 1
+    formulario.submit()
+})
 
 function obtenerDocentes() {
     return obtenerDatos("docentes")
@@ -156,7 +127,7 @@ function eliminarDocente(id) {
     );
     localStorage.setItem("docentes", JSON.stringify(docentesActualizados))
     mostraDocentes(docentesActualizados)
-    if (docenteEditandoId === id){
+    if (docenteEditandoId === id) {
         formulario.reset()
         docenteEditandoId = null
         formulario.querySelector("button").textContent = "Guardar docente"
@@ -170,7 +141,7 @@ listaDocentes.addEventListener("click", (e) => {
         const id = Number(boton_el.dataset.id)
         const confirmar = confirm("¿Está seguro de eliminar este docente?")
         if (confirmar) {
-        eliminarDocente(id)
+            eliminarDocente(id)
         }
     }
     const boton_ed = e.target.closest(".btn-editar")
@@ -186,9 +157,15 @@ function editarDocente(id) {
     document.querySelector("#nombre").value = docente.nombre;
     document.querySelector("#especialidad").value = docente.especialidad;
     document.querySelector("#correo").value = docente.correo;
+    docenteEditar = {
+        nombre: docente.nombre,
+        especialidad: docente.especialidad,
+        correo: docente.correo
+    }
     docenteEditandoId = id;
     formulario.querySelector("button").textContent = "Actualizar Docente"
     document.querySelector("#nombre").focus()
+    btnCancelar.style.display = "block"
 }
 
 const docentes = obtenerDocentes()

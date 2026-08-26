@@ -101,6 +101,10 @@ button:hover {
     background-color: #1d4ed8;
 }
 
+.btn-cancelar {
+    display: none;
+}
+
 .lista-container {
     background-color: white;
     padding: 25px;
@@ -137,7 +141,7 @@ th {
     z-index: 1000;
 }
 .mje-error {
-    background-color: #fee2e2;
+    background-color: #fd6767;
 }
 
 .mje-exito {
