@@ -56,14 +56,15 @@ formulario.addEventListener("submit", function (event) {
             especialidad: especialidad,
             correo: correo
         }
-
+        
+        if (bandera === 1) {
+            mostrarMensaje("Edición cancelada", "mje-exito")
+            return
+        }
+        
         if (datosActuales.nombre === docenteEditar.nombre &&
             datosActuales.especialidad === docenteEditar.especialidad &&
             datosActuales.correo === docenteEditar.correo) {
-            if (bandera === 1) {
-                mostrarMensaje("Edición cancelada", "mje-exito")
-                return
-            }
             mostrarMensaje("No se realizaron cambios", "mje-error");
             return
         }
