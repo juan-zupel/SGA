@@ -1,3 +1,24 @@
 GET http://localhost:3000/alumnos
 ###
-GET http://localhost:3000/alumnos/1
+GET http://localhost:3000/alumnos/3
+###
+POST http://localhost:3000/alumnos
+Content-Type: application/json
+
+{
+    "id": "6",
+    "nombre": "Lucresia",
+    "carrera": "Maestra de Cuidados Especiales"
+}
+
+###
+PUT http://localhost:3000/alumnos/1788201391450
+Content-Type: application/json
+
+{
+    "id": 3,
+    "nombre": "Angel",
+    "carrera": "Negro"
+}
+###
+GET http://localhost:3000/alumnos/3
