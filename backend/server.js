@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+const alumnosRoutes = require("./routes/alumnos.routes");   // anotar
+app.use("/alumnos", alumnosRoutes);                         // anotar
 
-const alumnos = [
+let alumnos = [
     {
         id: 1,
         nombre: "Ana",
@@ -30,30 +32,12 @@ const alumnos = [
     }
 ];
 
-app.get("/alumnos", (req, res) => {
-    res.json(alumnos);
-});
-
-app.get("/alumnos/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const alumno = alumnos.find( a => a.id === id);
-    res.json(alumno);
-});
-
-app.post("/alumnos", (req, res) => {
-    const nuevoAlumno = req.body;
-    alumnos.push(nuevoAlumno);
-    res.json({mensaje: "Alumno Registrado Correctamente"});
-}),
-
-app.put("/alumnos/:id", (req, res) => {
-    const id = Number(req.params.id);
-    const alumno = alumnos.find(alumno => alumno.id === id);
-    alumno.id = req.body.id;
-    alumno.nombre = req.body.nombre;
-    alumno.carrera = req.body.carrera;
-    res.json({mensaje: "Alumno Actualizado Correctamente"});
-});
+// Creo un middleware
+// app.use((req, res, next) => {
+//     console.log(req.method);
+//     console.log(req.url);
+//     next();
+// });
 
 app.listen(3000, () => {
     console.log("Servidor funcionando en http://localhost:3000")

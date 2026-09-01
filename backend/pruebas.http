@@ -22,3 +22,5 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:3000/alumnos/3
+###
+DELETE http://localhost:3000/alumnos/4
