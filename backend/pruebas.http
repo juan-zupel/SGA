@@ -1,6 +1,6 @@
 GET http://localhost:3000/alumnos
 ###
-GET http://localhost:3000/alumnos/3
+GET http://localhost:3000/alumnos/2
 ###
 POST http://localhost:3000/alumnos
 Content-Type: application/json
@@ -12,7 +12,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/alumnos/1788201391450
+PUT http://localhost:3000/alumnos/1788372924110
 Content-Type: application/json
 
 {

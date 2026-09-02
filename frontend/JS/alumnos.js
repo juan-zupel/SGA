@@ -132,17 +132,11 @@ function mostraAlumnos(alumnos) {
             <td>${alumno.carrera}</td>
             <td>${alumno.correo}</td>
             <td>
-                <button 
-                class="btn-editar" 
-                data-id="${alumno.id}"
-                title="Editar alumno">
-                <i class="fa-solid fa-pen"></i>
+                <button class="btn-editar" data-id="${alumno.id}" title="Editar alumno">
+                    <i class="fa-solid fa-pen"></i>
                 </button>
-                <button 
-                class="btn-eliminar" 
-                data-id="${alumno.id}"
-                title="Eliminar alumno">
-                <i class="fa-solid fa-trash"></i>
+                <button class="btn-eliminar" data-id="${alumno.id}" title="Eliminar alumno">
+                    <i class="fa-solid fa-trash"></i>
                 </button>
             </td>
         </tr>
