@@ -7,11 +7,27 @@ function obtenerAlumnos(req, res) {
 function obtenerAlumnoUnico(req, res) {
     const id = Number(req.params.id);
     const alumno = alumnos.find( a => a.id === id);
+    if (!alumno) {
+        return res.status(400).json({
+            mensaje: "Alumno no encontrado"
+        });
+    };
     res.json(alumno);
 };
 
 function crearAlumno(req, res) {
     const nuevoAlumno = req.body;
+    const {id, nombre, carrera} = req.body;        // anotar
+    if(!id || !nombre || !carrera) {
+        return res.status(400).json({
+            mensaje: "Todos los campos son obligatorios"
+        });
+    };
+    if (typeof nombre !== "string") {
+        return res.status(400).json({
+            mensaje: "El nombre no debe contener números"
+        });
+    }
     alumnos.push(nuevoAlumno);
     res.json({mensaje: "Alumno Registrado Correctamente"});
 };
@@ -19,6 +35,11 @@ function crearAlumno(req, res) {
 function modificarAlumno(req, res) {
     const id = Number(req.params.id);
     const alumno = alumnos.find(alumno => alumno.id === id);
+    if (!alumno) {
+        return res.status(400).json({
+            mensaje: "Alumo no encontrado"
+        });
+    };
     alumno.id = req.body.id;
     alumno.nombre = req.body.nombre;
     alumno.carrera = req.body.carrera;
@@ -27,6 +48,12 @@ function modificarAlumno(req, res) {
 
 function eliminarAlumno(req, res) {
     const id = Number(req.params.id);
+    const alumnoNoEncontrado = alumnos.find(alumno => alumno.id === id);
+    if (!alumnoNoEncontrado) {
+        return res.status(400).json({
+            mensaje: "Alumno no existente"
+        });
+    };
     const alumnosActualizados = alumnos.filter(alumno => alumno.id !== id);
     alumnos.length = 0;
     alumnos.push(...alumnosActualizados);
