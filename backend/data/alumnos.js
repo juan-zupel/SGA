@@ -10,7 +10,7 @@ const alumnos = [
         carrera: "Sistemas"
     },
     {
-        id: Date.now(),
+        id: 3,
         nombre: "Angel",
         carrera: "Negro"
     },
