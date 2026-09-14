@@ -1,14 +1,15 @@
 GET http://localhost:3000/alumnos
 ###
-GET http://localhost:3000/alumnos/5
+GET http://localhost:3000/alumnos/2063
 ###
 POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "id": "6",
-    "nombre": "Lucresia",
-    "carrera": "Maestra de Cuidados Especiales"
+    "legajo": "8563",
+    "nombre": "Lucia",
+    "carrera": "Maestra de Cuidados No Especiales", 
+    "correo": "Lucia@gmail.com"
 }
 ###
 POST http://localhost:3000/alumnos
@@ -20,15 +21,16 @@ Content-Type: application/json
     "carrera": "AAAAAAHHHHHHHHHH"
 }
 ###
-PUT http://localhost:3000/alumnos/3
+PUT http://localhost:3000/alumnos/8563
 Content-Type: application/json
 
 {
-    "id": 3,
-    "nombre": "Negro",
-    "carrera": "Negradas"
+    "legajo": 8563,
+    "nombre": "Negra",
+    "carrera": "Negradas", 
+    "correo": "negrosanonimos@gmail.com"
 }
 ###
-GET http://localhost:3000/alumnos/2
+GET http://localhost:3000/alumnos/2001
 ###
-DELETE http://localhost:3000/alumnos/2
+DELETE http://localhost:3000/alumnos/2063

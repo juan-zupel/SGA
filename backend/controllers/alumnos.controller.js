@@ -5,9 +5,8 @@ async function obtenerAlumnos(req, res) {
     res.json(alumnos);
 };
 
-function obtenerAlumnoUnico(req, res) {
-    const id = Number(req.params.id);
-    const alumno = alumnos.find( a => a.id === id);
+async function obtenerAlumnoUnico(req, res) {
+    const alumno = await Alumno.findOne({legajo: Number(req.params.id)});      // anotar
     if (!alumno) {
         return res.status(400).json({
             mensaje: "Alumno no encontrado"
@@ -16,10 +15,9 @@ function obtenerAlumnoUnico(req, res) {
     res.json(alumno);
 };
 
-function crearAlumno(req, res) {
-    const nuevoAlumno = req.body;
-    const {id, nombre, carrera} = req.body;        // anotar
-    if(!id || !nombre || !carrera) {
+async function crearAlumno(req, res) {
+    const {legajo, nombre, carrera, correo} = req.body;        // anotar
+    if(!legajo || !nombre || !carrera || !correo) {
         return res.status(400).json({
             mensaje: "Todos los campos son obligatorios"
         });
@@ -29,35 +27,27 @@ function crearAlumno(req, res) {
             mensaje: "El nombre no debe contener números"
         });
     }
-    alumnos.push(nuevoAlumno);
-    res.json({mensaje: "Alumno Registrado Correctamente"});
+    const nuevoAlumno = await Alumno.create({legajo, nombre, carrera, correo});
+    res.json(nuevoAlumno);
 };
 
-function modificarAlumno(req, res) {
-    const id = Number(req.params.id);
-    const alumno = alumnos.find(alumno => alumno.id === id);
+async function modificarAlumno(req, res) {
+    const alumno = await Alumno.findOneAndUpdate({legajo: Number(req.params.id)}, req.body, {returnDocument: "after"})
     if (!alumno) {
         return res.status(400).json({
             mensaje: "Alumo no encontrado"
         });
     };
-    alumno.id = req.body.id;
-    alumno.nombre = req.body.nombre;
-    alumno.carrera = req.body.carrera;
-    res.json({mensaje: "Alumno Actualizado Correctamente"});
+    res.json(alumno);
 };
 
-function eliminarAlumno(req, res) {
-    const id = Number(req.params.id);
-    const alumnoNoEncontrado = alumnos.find(alumno => alumno.id === id);
-    if (!alumnoNoEncontrado) {
+async function eliminarAlumno(req, res) {
+    const alumno = await Alumno.findOneAndDelete({legajo: Number(req.params.id)})
+    if (!alumno) {
         return res.status(400).json({
             mensaje: "Alumno no existente"
         });
     };
-    const alumnosActualizados = alumnos.filter(alumno => alumno.id !== id);
-    alumnos.length = 0;
-    alumnos.push(...alumnosActualizados);
     res.json({mensaje: "Alumno Eliminado Correctamente"});
 };
 
