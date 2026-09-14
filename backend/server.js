@@ -3,7 +3,9 @@ const app = express();
 app.use(express.json());
 const alumnosRoutes = require("./routes/alumnos.routes");   // anotar
 app.use("/alumnos", alumnosRoutes);                         // anotar
-const conectarBD = require("./config/database")
+const conectarBD = require("./config/database");
+require("dotenv").config();
+const PORT = process.env.PORT;
 
 conectarBD()
 
@@ -14,6 +16,6 @@ conectarBD()
 //     next();
 // });
 
-app.listen(3000, () => {
-    console.log("Servidor funcionando en http://localhost:3000")
+app.listen(PORT, () => {
+    console.log(`Servidor funcionando en ${PORT}`)
 });

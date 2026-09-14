@@ -16,16 +16,17 @@ POST http://localhost:3000/alumnos
 Content-Type: application/json
 
 {
-    "id": 8,
+    "legajo": 6582,
     "nombre": "Raúl Alejandro",
-    "carrera": "AAAAAAHHHHHHHHHH"
+    "carrera": "AM AUT GHAGHGHGAHGHHHH", 
+    "correo": "raulalegandro@gmail.com"
 }
 ###
 PUT http://localhost:3000/alumnos/8563
 Content-Type: application/json
 
 {
-    "legajo": 8563,
+    "legajo": 8555,
     "nombre": "Negra",
     "carrera": "Negradas", 
     "correo": "negrosanonimos@gmail.com"
