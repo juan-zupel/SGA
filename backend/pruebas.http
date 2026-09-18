@@ -1,37 +1,51 @@
-GET http://localhost:3000/alumnos
+GET http://localhost:3001/alumnos
 ###
-GET http://localhost:3000/alumnos/2063
+GET http://localhost:3001/alumnos/2001
 ###
-POST http://localhost:3000/alumnos
+POST http://localhost:3001/alumnos
 Content-Type: application/json
 
 {
-    "legajo": "8563",
+    "legajo": 820000,
     "nombre": "Lucia",
     "carrera": "Maestra de Cuidados No Especiales", 
     "correo": "Lucia@gmail.com"
 }
 ###
-POST http://localhost:3000/alumnos
+PUT http://localhost:3001/alumnos/8563
 Content-Type: application/json
 
 {
-    "legajo": 6582,
-    "nombre": "Raúl Alejandro",
-    "carrera": "AM AUT GHAGHGHGAHGHHHH", 
-    "correo": "raulalegandro@gmail.com"
-}
-###
-PUT http://localhost:3000/alumnos/8563
-Content-Type: application/json
-
-{
-    "legajo": 8555,
     "nombre": "Negra",
     "carrera": "Negradas", 
     "correo": "negrosanonimos@gmail.com"
 }
 ###
-GET http://localhost:3000/alumnos/2001
+DELETE http://localhost:3001/alumnos/8563
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ###
-DELETE http://localhost:3000/alumnos/2063
+GET http://localhost:3001/docentes
+###
+GET http://localhost:3001/docentes/3582
+###
+POST http://localhost:3001/docentes
+Content-Type: application/json
+
+{
+    "legajo": 6666,
+    "nombre": "Lucia",
+    "especialidad": "Maestra de Cuidados No Especiales", 
+    "correo": "Lucia@gmail.com"
+}
+###
+PUT http://localhost:3001/docentes/6666
+Content-Type: application/json
+
+{
+    "nombre": "NNNNNN",
+    "especialidad": "nnnnnnnnnnnnnnnnnnnnnnnnnn", 
+    "correo": "nnnnnn@nnnnnnnnnnnnn"
+}
+###
+DELETE http://localhost:3001/docentes/6666

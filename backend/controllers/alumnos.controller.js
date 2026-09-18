@@ -33,7 +33,7 @@ async function crearAlumno(req, res) {
         })
     };
     const existe = await Alumno.findOne({legajo});
-    if (legajo) {
+    if (existe) {
         return res.status(400).json({
             mensaje: "El legajo ya existe"
         })

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -7,8 +8,11 @@ app.use(express.json());
 const alumnosRoutes = require("./routes/alumnos.routes");   // anotar
 app.use("/alumnos", alumnosRoutes);                         // anotar
 
+const docentesRoutes = require("./routes/docentes.routes");
+app.use("/docentes", docentesRoutes);
+
 const conectarBD = require("./config/database");
-require("dotenv").config();
+
 const PORT = process.env.PORT;
 
 conectarBD();
