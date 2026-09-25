@@ -1,5 +1,7 @@
+// Define que se usara el modelo establecido en la carpeta establecida
 const Docente = require("../models/Docente");
 
+// Se crean las funciones correspondientes
 async function obtenerDocentes(req, res) {
     const docente = await Docente.find();
     return res.json(docente);
@@ -69,4 +71,5 @@ async function modificarDocente(req, res) {
     return res.json(docente);
 }
 
+// Se exportan todas las funciones creadas
 module.exports = { obtenerDocentes, obtenerDocenteUnico, crearDocente, eliminarDocente, modificarDocente }
