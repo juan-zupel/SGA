@@ -1,6 +1,15 @@
-function Titulo() {
+function Titulo({color, texto}) {
     return (
-        <h1>Sistema de Gestión Académica</h1>
+        <h1 style={{color: color}}> {texto} </h1>
     )
 }
-export default Titulo;
+
+// function Titulo({props}) {
+//     return (
+//         <>
+//         <h1 style={{color: props.color}}> {props.texto} </h1>
+//         <br /><br /><br /><br /><br /><br /><br /><br /><br />
+//         </>
+//     )
+// }
+export default Titulo
