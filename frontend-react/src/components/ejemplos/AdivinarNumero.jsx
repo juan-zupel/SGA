@@ -43,7 +43,7 @@ function AdivinarNumero() {
                 <input type="number" value={numUusario} onChange={(e) => setNumUusario(e.target.value)}/>
                 <button onClick={generarNumero}>Adivinar</button>
             </div>
-            <div style={{}}>
+            <div>
                 <p>Partidas Jugadas: {jugadas}</p>
                 <p>Partidas Ganadas: {ganadas}</p>
                 <p>Partidas Perdidas: {perdidas}</p>
