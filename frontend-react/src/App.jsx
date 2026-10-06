@@ -1,6 +1,8 @@
 import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
 import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
 import Contador from "./components/ejemplos/Contador"
+import Mensaje from "./components/ejemplos/Mensaje"
+import TamañoTexto from "./components/ejemplos/TamañoTexto"
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
 import TarjetaAlumno from "./components/TarjetaAlumno"
@@ -24,6 +26,10 @@ function App()
     <CambiarTitulo/>
     <br /><br /><br />
     <AdivinarNumero/>
+    <br /><br /><br />
+    <Mensaje/>
+    <br /><br /><br />
+    <TamañoTexto/>
     <Footer/>
     </>
   )

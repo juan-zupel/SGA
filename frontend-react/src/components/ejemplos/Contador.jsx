@@ -26,8 +26,10 @@ function Contador() {
             <button onClick={decremento}style={{width: "40px"}}>-</button>
         </div>
         <br />
-        <button onClick={mostrarOcultar}>Mostrar/Ocultar</button>
-        {mostrar && <p>Big Dick</p>}
+        <div style={{display: "table-column", justifyContent: "center"}}>
+        <button onClick={mostrarOcultar} style={{height: "25px", width: "120px"}}>Mostrar/Ocultar</button>
+        {mostrar && <p>BUUU</p>}
+        </div>
         </>
     )
 }
