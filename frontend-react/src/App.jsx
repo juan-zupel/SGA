@@ -1,13 +1,14 @@
-import { useState } from "react"
-import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
-import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
-import Contador from "./components/ejemplos/Contador"
-import Mensaje from "./components/ejemplos/Mensaje"
-import TamañoTexto from "./components/ejemplos/TamañoTexto"
-import Footer from "./components/Footer"
-import Navbar from "./components/Navbar"
-import TarjetaAlumno from "./components/TarjetaAlumno"
-import Titulo from "./components/Titulo"
+import { useEffect, useState } from "react"
+// import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
+// import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
+// import Contador from "./components/ejemplos/Contador"
+// import Mensaje from "./components/ejemplos/Mensaje"
+// import TamañoTexto from "./components/ejemplos/TamañoTexto"
+// import Footer from "./components/Footer"
+// import Navbar from "./components/Navbar"
+// import TarjetaAlumno from "./components/TarjetaAlumno"
+// import Titulo from "./components/Titulo"
+// import Pantalla from "./components/ejemplos/Pantalla"
 import FormularioAlumno from "./components/FormularioAlumno"
 
 // function App() 
@@ -37,10 +38,8 @@ import FormularioAlumno from "./components/FormularioAlumno"
 //   )
 
 
-
   function App() 
 {
-
   return (
     <>
       <FormularioAlumno/>

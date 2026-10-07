@@ -13,6 +13,7 @@ function FormularioAlumno() {
 
         console.log(nombre);
         console.log(correo);
+
     }
 
     return(
