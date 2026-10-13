@@ -1,5 +1,4 @@
 const formulario = document.querySelector("#formulario")
-// const mensaje = document.querySelector("#mensaje")
 const listaAlumnos = document.querySelector("#listaAlumnos")
 let alumnoEditandoLegajo = null
 let alumnoEditar = null
@@ -32,6 +31,7 @@ formulario.addEventListener("submit", async function (event) {
         mostrarMensaje("El nombre debe tener al menos 3 caracteres", "mje-error")
         return
     }
+
     try {
         // Si alumnoEditandoLegajo es null, significa que estamos creando un nuevo alumno, por lo que hacemos un POST.
         if (alumnoEditandoLegajo === null) {
@@ -185,6 +185,7 @@ async function editarAlumno(legajo) {
         mostrarMensaje("Alumno no encontrado", "mje-error")
         return
     }
+    
     document.querySelector("#legajo").value = alumno.legajo;
     document.querySelector("#legajo").disabled = true;
     document.querySelector("#nombre").value = alumno.nombre;

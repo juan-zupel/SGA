@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 // import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
 // import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
 // import Contador from "./components/ejemplos/Contador"
@@ -9,7 +9,9 @@ import { useEffect, useState } from "react"
 // import TarjetaAlumno from "./components/TarjetaAlumno"
 // import Titulo from "./components/Titulo"
 // import Pantalla from "./components/ejemplos/Pantalla"
-import FormularioAlumno from "./components/FormularioAlumno"
+// import FormularioAlumno from "./components/FormularioAlumno"
+
+import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
 
 // function App() 
 // {
@@ -42,7 +44,7 @@ import FormularioAlumno from "./components/FormularioAlumno"
 {
   return (
     <>
-      <FormularioAlumno/>
+      <ListaAlumnos/>
     </>
   )
 }

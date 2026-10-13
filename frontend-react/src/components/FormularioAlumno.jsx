@@ -14,6 +14,7 @@ function FormularioAlumno() {
         console.log(nombre);
         console.log(correo);
 
+        e.submit()
     }
 
     return(
