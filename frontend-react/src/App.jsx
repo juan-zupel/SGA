@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react"
+import { useState } from "react"
 // import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
 // import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
 // import Contador from "./components/ejemplos/Contador"
@@ -9,7 +9,7 @@
 // import TarjetaAlumno from "./components/TarjetaAlumno"
 // import Titulo from "./components/Titulo"
 // import Pantalla from "./components/ejemplos/Pantalla"
-// import FormularioAlumno from "./components/FormularioAlumno"
+import FormularioAlumno from "./components/FormularioAlumno"
 
 import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
 
@@ -42,10 +42,28 @@ import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
 
   function App() 
 {
+  const [actualizar, setActualizar] = useState(0);
+  const [alumnoEditar, setAlumnoEditar] = useState(null);
+
+  function alumnoCreado() {
+    setActualizar(valor => valor +1);
+    setAlumnoEditar(null);
+  }
+
+  function seleccionarAlumno (alumno) {
+    setAlumnoEditar(alumno);
+  }
+
   return (
-    <>
-      <ListaAlumnos/>
-    </>
+    <main>
+      <FormularioAlumno key={alumnoEditar?.legajo ?? "nuevo"}
+        onAlumnoCreado={alumnoCreado}
+        alumnoEditar={alumnoEditar}/>
+      <ListaAlumnos 
+        actualizar={actualizar} 
+        onAlumnoCreado={alumnoCreado}
+        onEditarAlumno={seleccionarAlumno}/>
+    </main>
   )
 }
 export default App
