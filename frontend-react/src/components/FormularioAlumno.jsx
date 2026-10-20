@@ -1,13 +1,15 @@
 import { useState } from "react";
 const API_ALUMNOS = "http://localhost:3001/alumnos"
 
-function FormularioAlumno({ onAlumnoCreado }) {
+function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
+    
     const [formulario, setFormulario] = useState({
-        legajo: "",
-        nombre: "",
-        carrera: "",
-        correo: ""
+        legajo: String(alumnoEditar?.legajo ?? ""),
+        nombre: alumnoEditar?.nombre ?? "",
+        carrera: alumnoEditar?.carrera ?? "",
+        correo: alumnoEditar?.correo ?? ""
     })
+    
     const [error, setError] = useState("")
     const [guardando, setGuardando] = useState(false)
 
@@ -25,13 +27,19 @@ function FormularioAlumno({ onAlumnoCreado }) {
         setError("")
         setGuardando(true)
 
+        const alumno = {
+            ...formulario,
+            legajo: Number(formulario.legajo)
+        };
+
+        const editando = Boolean(alumnoEditar);
+        const url = editando 
+            ? `${API_ALUMNOS}/${alumnoEditar.legajo}` 
+            : API_ALUMNOS
+
         try {
-            const alumno = {
-                ...formulario,
-                legajo: Number(formulario.legajo)
-            }
-            const respuesta = await fetch(API_ALUMNOS, {
-                method: "POST",
+            const respuesta = await fetch(url, {
+                method: editando ? "PUT" : "Post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(alumno)
             })
@@ -54,8 +62,14 @@ function FormularioAlumno({ onAlumnoCreado }) {
             setGuardando(false)
         }
     }
+
+    function cancelar() {
+        onCancelar()
+    }
+
     return (
         <>
+            <h2>{alumnoEditar ? "Editando Alumno" : "Nuevo Alumno"}</h2>
             <form onSubmit={guardar} style={{display: "flex", flexDirection: "column", marginRight: "30%", marginLeft: "30%"}}>
                 <label htmlFor="legajo">Legajo</label>
                 <input
@@ -90,8 +104,12 @@ function FormularioAlumno({ onAlumnoCreado }) {
                     required
                 />
                 <button style={{marginRight: "auto", marginLeft: "auto", marginTop: "30px", height: "27px"}} type="submit" disabled={guardando}>
-                    {guardando ? "Guardando..." : "Guardar"}
+                    {guardando ? "Guardando..." : alumnoEditar ? "Guardar Cambios" : "Guardar"}
                 </button>
+                {alumnoEditar && (
+                    <button style={{marginRight: "auto", marginLeft: "auto", marginTop: "5px", height: "27px"}} 
+                    type="button" onClick={cancelar} disabled={guardando}>Cancelar Edición</button>
+                )}
                 <br />
                 {error && <p role="alert">{error}</p>}
             </form>

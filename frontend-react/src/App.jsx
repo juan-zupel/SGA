@@ -54,15 +54,23 @@ import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
     setAlumnoEditar(alumno);
   }
 
+  function cancelarEdicion () {
+    setAlumnoEditar(null);
+  }
+
   return (
     <main>
-      <FormularioAlumno key={alumnoEditar?.legajo ?? "nuevo"}
+      <FormularioAlumno 
+        key={alumnoEditar?.legajo ?? "nuevo"}
         onAlumnoCreado={alumnoCreado}
-        alumnoEditar={alumnoEditar}/>
+        alumnoEditar={alumnoEditar}
+        onCancelar={cancelarEdicion}
+      />
       <ListaAlumnos 
         actualizar={actualizar} 
         onAlumnoCreado={alumnoCreado}
-        onEditarAlumno={seleccionarAlumno}/>
+        onEditarAlumno={seleccionarAlumno}
+      />
     </main>
   )
 }
