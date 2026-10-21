@@ -31,11 +31,10 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
             ...formulario,
             legajo: Number(formulario.legajo)
         };
-
         const editando = Boolean(alumnoEditar);
         const url = editando 
             ? `${API_ALUMNOS}/${alumnoEditar.legajo}` 
-            : API_ALUMNOS
+            : API_ALUMNOS;
 
         try {
             const respuesta = await fetch(url, {
@@ -71,7 +70,7 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
         <>
             <h2>{alumnoEditar ? "Editando Alumno" : "Nuevo Alumno"}</h2>
             <form onSubmit={guardar} style={{display: "flex", flexDirection: "column", marginRight: "30%", marginLeft: "30%"}}>
-                <label htmlFor="legajo">Legajo</label>
+                <label style={{ display: "flex", marginLeft: "5px", marginBottom: "0", marginTop: "10px"}} htmlFor="legajo">Legajo</label>
                 <input
                     id="legajo"
                     name="legajo"
@@ -79,7 +78,7 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
                     onChange={manejarCambio}
                     required
                 />
-                <label htmlFor="nombre">Nombre</label>
+                <label style={{ display: "flex", marginLeft: "5px", marginBottom: "0", marginTop: "10px"}} htmlFor="nombre">Nombre</label>
                 <input
                     id="nombre"
                     name="nombre"
@@ -87,7 +86,7 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
                     onChange={manejarCambio}
                     required
                 />
-                <label htmlFor="carrera">Carrera</label>
+                <label style={{ display: "flex", marginLeft: "5px", marginBottom: "0", marginTop: "10px"}} htmlFor="carrera">Carrera</label>
                 <input
                     id="carrera"
                     name="carrera"
@@ -95,7 +94,7 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
                     onChange={manejarCambio}
                     required
                 />
-                <label htmlFor="correo">Correo</label>
+                <label style={{ display: "flex", marginLeft: "5px", marginBottom: "0", marginTop: "10px"}} htmlFor="correo">Correo</label>
                 <input
                     id="correo"
                     name="correo"
