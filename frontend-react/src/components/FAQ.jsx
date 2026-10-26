@@ -27,12 +27,12 @@ function FAQ() {
                         id={`${id}-panel1-header`}
                     >
                         <Typography component="span">
-                            ¿Por que Joa tiene down?
+                            como guardar alumnos ?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            Si...
+                            apretá agregar alumno
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -43,12 +43,12 @@ function FAQ() {
                         id={`${id}-panel2-header`}
                     >
                         <Typography component="span">
-                            ¿Tiene algo que ver perder pelo con mear negro?
+                            cómo me registro como profesor
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            No, pero me apiado de vos.....
+                            no podes
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -59,12 +59,12 @@ function FAQ() {
                         id={`${id}-panel2-header`}
                     >
                         <Typography component="span">
-                            ¿Cómo podria deshacerme de un pollo de 178cm y 73kg?
+                            se puede eliminar a un alumno
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            Ni idea.
+                            si, pero tenes que ocultar bien el cuerpo
                         </Typography>
                     </AccordionDetails>
                 </Accordion>

@@ -1,5 +1,4 @@
-// import { useState } from "react"
-
+import { useState } from "react"
 
 // import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
 // import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
@@ -13,13 +12,10 @@
 // import Pantalla from "./components/ejemplos/Pantalla"
 // import EjemploMUI from "./components/ejemplos/ejemploMUI";
 
-
-// import FormularioAlumno from "./components/FormularioAlumno"
-// import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
-
-
-
+import FormularioAlumno from "./components/FormularioAlumno"
+import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
 import FAQ from "./components/FAQ";
+import SelectorTema from "./components/SelectorTema"
 
 // function App() 
 // {
@@ -48,41 +44,40 @@ import FAQ from "./components/FAQ";
 //   )
 
 
-  function App() 
-{
-  // const [actualizar, setActualizar] = useState(0);
-  // const [alumnoEditar, setAlumnoEditar] = useState(null);
+function App() {
+  const [actualizar, setActualizar] = useState(0);
+  const [alumnoEditar, setAlumnoEditar] = useState(null);
 
-  // function alumnoCreado() {
-  //   setActualizar(valor => valor +1);
-  //   setAlumnoEditar(null);
-  // }
+  function alumnoCreado() {
+    setActualizar(valor => valor +1);
+    setAlumnoEditar(null);
+  }
 
-  // function seleccionarAlumno (alumno) {
-  //   setAlumnoEditar(alumno);
-  // }
+  function seleccionarAlumno (alumno) {
+    setAlumnoEditar(alumno);
+  }
 
-  // function cancelarEdicion () {
-  //   setAlumnoEditar(null);
-  // }
+  function cancelarEdicion () {
+    setAlumnoEditar(null);
+  }
 
   return (
-    // <main>
-    //   <FormularioAlumno 
-    //     key={alumnoEditar?.legajo ?? "nuevo"}
-    //     onAlumnoCreado={alumnoCreado}
-    //     alumnoEditar={alumnoEditar}
-    //     onCancelar={cancelarEdicion}
-    //   />
-    //   <ListaAlumnos 
-    //     actualizar={actualizar} 
-    //     onAlumnoCreado={alumnoCreado}
-    //     onEditarAlumno={seleccionarAlumno}
-    //   />
-    // </main>
-    <>
-      <FAQ/>
-    </>
+    <main>
+      <SelectorTema />
+      <FAQ />
+      <FormularioAlumno
+        key={alumnoEditar?.legajo ?? "nuevo"}
+        onAlumnoCreado={alumnoCreado}
+        alumnoEditar={alumnoEditar}
+        onCancelar={cancelarEdicion}
+      />
+      <ListaAlumnos
+        actualizar={actualizar}
+        onAlumnoCreado={alumnoCreado}
+        onEditarAlumno={seleccionarAlumno}
+      />
+    </main>
+
   )
 }
 export default App
