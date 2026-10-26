@@ -1,83 +1,20 @@
-import { useState } from "react"
-
-// import AdivinarNumero from "./components/ejemplos/AdivinarNumero"
-// import CambiarTitulo from "./components/ejemplos/CambiarTitulo"
-// import Contador from "./components/ejemplos/Contador"
-// import Mensaje from "./components/ejemplos/Mensaje"
-// import TamañoTexto from "./components/ejemplos/TamañoTexto"
-// import Footer from "./components/Footer"
-// import Navbar from "./components/Navbar"
-// import TarjetaAlumno from "./components/TarjetaAlumno"
-// import Titulo from "./components/Titulo"
-// import Pantalla from "./components/ejemplos/Pantalla"
-// import EjemploMUI from "./components/ejemplos/ejemploMUI";
-
-import FormularioAlumno from "./components/FormularioAlumno"
-import { ListaAlumnos } from "./components/ejemplos/listaAlumnos"
-import FAQ from "./components/FAQ";
-import SelectorTema from "./components/SelectorTema"
-
-// function App() 
-// {
-//   return (
-//     <>
-//     <Navbar/>
-//     <Titulo texto = "Sistema de Gestión Académica" color = "blueviolet"/>
-//     <br /><br />
-//     <h2>Administración de Alumnos</h2>
-//     <br />
-//     <TarjetaAlumno nombre="Ana López" carrera="Programación" edad="Edad: 3"/>
-//     <TarjetaAlumno nombre="Raúl Centurion" carrera="Cocina" edad="Edad: 74"/>
-//     <TarjetaAlumno nombre="Arian Ulloa" carrera="Catador de Pingos" edad="Edad: 13 (sin barba)"/>
-//     <br /><br /><br />
-//     <Contador/>
-//     <br /><br /><br />
-//     <CambiarTitulo/>
-//     <br /><br /><br />
-//     <AdivinarNumero/>
-//     <br /><br /><br />
-//     <Mensaje/>
-//     <br /><br /><br />
-//     <TamañoTexto/>
-//     <Footer/>
-//     </>
-//   )
-
+import Alumnos from "./pages/Alumnos";
+import { Routes, Route } from "react-router-dom";
+import FAQ from "./pages/FAQ";
+// import SelectorTema from "./components/SelectorTema"
+import LayoutPrincipal from "./layouts/LayoutPrincipal";
+import Inicio from "./pages/Inicio";
 
 function App() {
-  const [actualizar, setActualizar] = useState(0);
-  const [alumnoEditar, setAlumnoEditar] = useState(null);
-
-  function alumnoCreado() {
-    setActualizar(valor => valor +1);
-    setAlumnoEditar(null);
-  }
-
-  function seleccionarAlumno (alumno) {
-    setAlumnoEditar(alumno);
-  }
-
-  function cancelarEdicion () {
-    setAlumnoEditar(null);
-  }
 
   return (
-    <main>
-      <SelectorTema />
-      <FAQ />
-      <FormularioAlumno
-        key={alumnoEditar?.legajo ?? "nuevo"}
-        onAlumnoCreado={alumnoCreado}
-        alumnoEditar={alumnoEditar}
-        onCancelar={cancelarEdicion}
-      />
-      <ListaAlumnos
-        actualizar={actualizar}
-        onAlumnoCreado={alumnoCreado}
-        onEditarAlumno={seleccionarAlumno}
-      />
-    </main>
-
+    <Routes>
+      <Route path="/" element={<LayoutPrincipal />}>
+        <Route index element={<Inicio />} />
+        <Route path="alumnos" element={<Alumnos />} />
+        <Route path="ayuda" element={<FAQ />} />
+      </Route>
+    </Routes>
   )
 }
 export default App
