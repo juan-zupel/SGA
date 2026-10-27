@@ -24,14 +24,14 @@ export default function Alumnos() {
         <main>
             <FormularioAlumno
                 key={alumnoEditar?.legajo ?? "nuevo"}
-                onAlumnoCreado={alumnoCreado}
-                alumnoEditar={alumnoEditar}
+                onDocenteCreado={alumnoCreado}
+                docenteEditar={alumnoEditar}
                 onCancelar={cancelarEdicion}
             />
             <ListaAlumnos
                 actualizar={actualizar}
-                onAlumnoCreado={alumnoCreado}
-                onEditarAlumno={seleccionarAlumno}
+                onDocenteCreado={alumnoCreado}
+                onEditarDocente={seleccionarAlumno}
             />
         </main>
     )

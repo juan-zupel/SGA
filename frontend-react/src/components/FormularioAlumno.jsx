@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 const API_ALUMNOS = "http://localhost:3001/alumnos"
 
 function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
+    const nombreInputRef = useRef(null);
     
     const [formulario, setFormulario] = useState({
         legajo: String(alumnoEditar?.legajo ?? ""),
@@ -13,6 +14,12 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
     
     const [error, setError] = useState("")
     const [guardando, setGuardando] = useState(false)
+
+    useEffect(() => {
+        if (alumnoEditar) {
+            nombreInputRef.current?.focus();
+        }
+    }, [alumnoEditar]);
 
     function manejarCambio(e) {
         const { name, value } = e.target
@@ -179,6 +186,7 @@ function FormularioAlumno({ onAlumnoCreado, alumnoEditar, onCancelar }) {
                     <input
                         id="nombre"
                         name="nombre"
+                        ref={nombreInputRef}
                         value={formulario.nombre}
                         onChange={manejarCambio}
                         required

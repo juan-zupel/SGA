@@ -3,7 +3,7 @@ function Navbar() {
         <nav>
             <a href="#">Inicio</a>
             <a href="#">Alumnos</a>
-            <a href=""></a>
+            <a href="#">Docentes</a>
             <a href=""></a>
             <a href=""></a>
         </nav>

@@ -17,6 +17,8 @@ const alumnosRoutes = require("./routes/alumnos.routes");
 app.use("/alumnos", alumnosRoutes);
 const docentesRoutes = require("./routes/docentes.routes");
 app.use("/docentes", docentesRoutes);
+// const materiaRoutes = require("./routes/materias.routes");
+// app.use("/materia", materiasRoutes);
 
 // Se guarda en una constante la funcion encargada de hacer la conexion con la base de datos
 const conectarBD = require("./config/database");

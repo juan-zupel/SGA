@@ -6,7 +6,8 @@ import SelectorTema from "./SelectorTema";
 const enlaces = [
     { to: "/", label: "Inicio" },
     { to: "/alumnos", label: "Alumnos" },
-    { to: "/ayuda", label: "Ayuda" }
+    { to: "/ayuda", label: "Ayuda" },
+    { to: "/docentes", label: "Docentes" }
 ];
 
 export default function Header() {
