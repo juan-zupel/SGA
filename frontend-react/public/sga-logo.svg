@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="172" height="56" viewBox="0 0 172 56" fill="none">
+  <rect x="1" y="1" width="54" height="54" rx="16" fill="#526D82"/>
+  <path d="M12 17.5c7.1-2.6 12.2-.8 16 2.1v21c-3.8-2.9-8.9-4.7-16-2.1v-21Zm32 0c-7.1-2.6-12.2-.8-16 2.1v21c3.8-2.9 8.9-4.7 16-2.1v-21Z" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M17 25h6m-6 5h6m14-5h-6m6 5h-6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="66" y="7" width="101" height="42" rx="13" fill="#526D82"/>
+  <text x="80" y="37" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="1">SGA</text>
+</svg>

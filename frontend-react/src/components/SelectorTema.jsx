@@ -17,7 +17,7 @@ function SelectorTema() {
     }
 
     return (
-        <Box sx={{display: "flex", justifyContent: "flex-end", mb: 3, width: "100%"}}>
+        <Box sx={{display: "flex", justifyContent: "center", m: 0, width: "auto"}}>
             <MaterialUISwitch checked={modoOscuro} onChange={cambiarModo} inputProps={{"aria-laber": "Cambiar a modo claro/oscuro"}} />
         </Box>
     )
