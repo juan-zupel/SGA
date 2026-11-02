@@ -24,6 +24,7 @@ Content-Type: application/json
 DELETE http://localhost:3001/alumnos/8563
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 ###
 GET http://localhost:3001/docentes
 ###
@@ -49,3 +50,44 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:3001/docentes/6666
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+###
+GET http://localhost:3001/materias
+###
+GET http://localhost:3001/materias/PRG1
+###
+POST http://localhost:3001/materias
+Content-Type: application/json
+
+{
+    "codigo": "PRG1",
+    "nombre": "AAAAAAAAAHHHHHHHHHH",
+    "descripcion": "Он был героем, он был всем, и они убили его! Но они не победили его, потому что его сила возвысит его, потому что они слишком сильны, и он победит их во что бы то ни стало", 
+    "cargaHoraria": 4,
+    "estado": true
+}
+###
+PUT http://localhost:3001/materias/PGR4
+Content-Type: application/json
+
+{
+    "nombre": "Ganks free",
+    "descripcion": "El gank es para sacar ventaja si el compañero no se encunetra en linea sus minions si guiño guiño el gank nunca fue al champ enemigos sino a los minions", 
+    "cargaHoraria": 8,
+    "estado": true
+}
+###
+DELETE http://localhost:3001/materias/PGR1
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+###
+POST http://localhost:3001/auth/login
+Content-Type: application/json
+
+{
+    "email": "ramonramsesIV@gmail.com", 
+    "password": "ramseselmascapito_:P"
+}

@@ -7,7 +7,8 @@ async function conectarBD() {
         await mongoose.connect(process.env.MONGO_URI);
         console.log("Base de datos conectada");
     }catch(error) {
-        console.log("Error");
+        console.log("Error al conectar con la Base de Datos");
+        console.log("Error: ", error.message)
     }
 }
 
