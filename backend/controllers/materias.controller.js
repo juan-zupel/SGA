@@ -20,7 +20,7 @@ async function obtenerMateriaUnica(req, res) {
 async function crearMateria(req, res) {
     const existente = await Materia.findOne({codigo: req.body.codigo});
     const {codigo, nombre, descripcion, cargaHoraria, estado} = req.body;
-    if (!(codigo.trim()) || !(nombre.trim()) || !(descripcion.trim()) || !(cargaHoraria.trim()) || !estado) {
+    if (!(codigo.trim()) || !(nombre.trim()) || !(descripcion.trim()) || !(cargaHoraria) || !estado) {
         return res.status(400).json({
             mensaje: "Todos los campos son obligatorios"
         });

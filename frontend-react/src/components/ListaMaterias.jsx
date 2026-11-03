@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+import { ConfirmarEliminacionDialog } from "./Notificaciones";
+import { useNotificaciones } from "../contextoNotificaciones";
 const API_MATERIAS = "http://localhost:3001/materias";
 
 export function ListaMaterias({ actualizar, onMateriaCreada, onEditarMateria }) {
@@ -7,13 +9,16 @@ export function ListaMaterias({ actualizar, onMateriaCreada, onEditarMateria }) 
     const [materias, setMaterias] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("")
+    const [materiaPendienteEliminar, setMateriaPendienteEliminar] = useState(null);
+    const { notificar } = useNotificaciones();
 
-    async function eliminarMateria(codigo) {
-        const confirmar = window.confirm("¿Seguro que quiere eliminar la materia?");
-
-        if (!confirmar) {
+    async function confirmarEliminarMateria() {
+        if (!materiaPendienteEliminar) {
             return
         }
+
+        const codigo = materiaPendienteEliminar.codigo;
+        setMateriaPendienteEliminar(null);
 
         try {
             
@@ -22,14 +27,15 @@ export function ListaMaterias({ actualizar, onMateriaCreada, onEditarMateria }) 
             );
 
             if (!respuesta.ok) {
-                throw new Error(`No se pudo eliminar al docente.Estado HTTP: ${respuesta.status}`)
+                throw new Error(`No se pudo eliminar la materia. Estado HTTP: ${respuesta.status}`)
             };
 
+            notificar("La materia ha sido eliminada correctamente");
             onMateriaCreada();
 
         } catch(error) {
             console.error("Error al eliminar: ", error);
-            alert(error.message || "No se pudo eliminar la Materia");
+            notificar(error.message || "No se pudo eliminar la Materia", "error");
         }
     }
 
@@ -211,13 +217,20 @@ export function ListaMaterias({ actualizar, onMateriaCreada, onEditarMateria }) 
                                     }}
                                 >
                                     <button type="button" onClick={() => onEditarMateria(materia)}>Editar</button>
-                                    <button type="button" onClick={() => eliminarMateria(materia.codigo)}>Eliminar</button>
+                                    <button type="button" onClick={() => setMateriaPendienteEliminar(materia)}>Eliminar</button>
                                 </Box>
                             </Box>
                         ))}
                     </Box>
                 )
             }
+            <ConfirmarEliminacionDialog
+                open={Boolean(materiaPendienteEliminar)}
+                entidad="la materia"
+                nombre={materiaPendienteEliminar?.nombre}
+                onCancelar={() => setMateriaPendienteEliminar(null)}
+                onConfirmar={confirmarEliminarMateria}
+            />
         </Box>
     );
 }

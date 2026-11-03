@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
+import { useNotificaciones } from "../contextoNotificaciones";
 const API_MATERIAS = "http://localhost:3001/materias"
 
 function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
     const nombreInputRef = useRef(null);
+    const { notificar } = useNotificaciones();
     
     const [formulario, setFormulario] = useState({
         codigo: String(materiaEditar?.codigo ?? ""),
@@ -38,23 +40,31 @@ function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
 
         const materia = {
             ...formulario,
-            codigo: String(formulario.codigo), 
-            cargaHoraria: Number(formulario.cargaHoraria)
+            codigo: String(formulario.codigo),
+            cargaHoraria: Number(formulario.cargaHoraria),
+            estado: Boolean(formulario.estado)
         };
+
         const editando = Boolean(materiaEditar);
         const url = editando 
             ? `${API_MATERIAS}/${materiaEditar.codigo}` 
             : API_MATERIAS;
 
         try {
+            const metodo = editando ? "PUT" : "POST";
             const respuesta = await fetch(url, {
                 method: editando ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(materia)
             })
             if (!respuesta.ok) {
-                throw new Error(`No se pudo guardar la materia. Estado HTTP: ${respuesta.status}`)
+                throw new Error(`No se pudo guardar la materia. Estado HTTP: ${respuesta.status}, Error: ${error.message}`)
             }
+            notificar(
+                metodo === "PUT"
+                    ? "La materia ha sido actualizada correctamente"
+                    : "La materia ha sido creada correctamente"
+            );
             setFormulario({
                 codigo: "",
                 nombre: "",
@@ -208,6 +218,10 @@ function FormularioMateria({ onMateriaCreada, materiaEditar, onCancelar }) {
                 <Box>
                     <label htmlFor="cargaHoraria">Carga Horaria</label>
                     <input
+                        type="number"
+                        min="0"
+                        max="4"
+                        readOnly="true"
                         id="cargaHoraria"
                         name="cargaHoraria"
                         value={formulario.cargaHoraria}

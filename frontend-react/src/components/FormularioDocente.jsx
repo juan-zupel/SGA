@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
+import { useNotificaciones } from "../contextoNotificaciones";
 const API_DOCENTES = "http://localhost:3001/docentes"
 
 function FormularioDocente({ onDocenteCreado, docenteEditar, onCancelar }) {
     const nombreInputRef = useRef(null);
+    const { notificar } = useNotificaciones();
     
     const [formulario, setFormulario] = useState({
         legajo: String(docenteEditar?.legajo ?? ""),
@@ -46,13 +48,18 @@ function FormularioDocente({ onDocenteCreado, docenteEditar, onCancelar }) {
 
         try {
             const respuesta = await fetch(url, {
-                method: editando ? "PUT" : "Post",
+                method: editando ? "PUT" : "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(docente)
             })
             if (!respuesta.ok) {
                 throw new Error(`No se pudo guardar el docente. Estado HTTP: ${respuesta.status}`)
             }
+            notificar(
+                editando
+                    ? "El docente ha sido actualizado correctamente"
+                    : "El docente ha sido creado correctamente"
+            );
             setFormulario({
                 legajo: "",
                 nombre: "",

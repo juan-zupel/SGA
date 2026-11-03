@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
+import { ConfirmarEliminacionDialog } from "./Notificaciones";
+import { useNotificaciones } from "../contextoNotificaciones";
 const API_ALUMNOS = "http://localhost:3001/alumnos";
 
 export function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }) {
@@ -7,13 +9,16 @@ export function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }) {
     const [alumnos, setAlumnos] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("")
+    const [alumnoPendienteEliminar, setAlumnoPendienteEliminar] = useState(null);
+    const { notificar } = useNotificaciones();
 
-    async function eliminarAlumno(legajo) {
-        const confirmar = window.confirm("¿Seguro que quiere eliminar el alumno?");
-
-        if (!confirmar) {
+    async function confirmarEliminarAlumno() {
+        if (!alumnoPendienteEliminar) {
             return
         }
+
+        const legajo = alumnoPendienteEliminar.legajo;
+        setAlumnoPendienteEliminar(null);
 
         try {
             
@@ -25,11 +30,12 @@ export function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }) {
                 throw new Error(`No se pudo eliminar al alumno.Estado HTTP: ${respuesta.status}`)
             };
 
+            notificar("El alumno ha sido eliminado correctamente");
             onAlumnoCreado();
 
         } catch(error) {
             console.error("Error al eliminar: ", error);
-            alert(error.message || "No se pudo eliminar al Alumno");
+            notificar(error.message || "No se pudo eliminar al Alumno", "error");
         }
     }
 
@@ -210,13 +216,20 @@ export function ListaAlumnos({ actualizar, onAlumnoCreado, onEditarAlumno }) {
                                     }}
                                 >
                                     <button type="button" onClick={() => onEditarAlumno(alumno)}>Editar</button>
-                                    <button type="button" onClick={() => eliminarAlumno(alumno.legajo)}>Eliminar</button>
+                                    <button type="button" onClick={() => setAlumnoPendienteEliminar(alumno)}>Eliminar</button>
                                 </Box>
                             </Box>
                         ))}
                     </Box>
                 )
             }
+            <ConfirmarEliminacionDialog
+                open={Boolean(alumnoPendienteEliminar)}
+                entidad="al alumno"
+                nombre={alumnoPendienteEliminar?.nombre}
+                onCancelar={() => setAlumnoPendienteEliminar(null)}
+                onConfirmar={confirmarEliminarAlumno}
+            />
         </Box>
     );
 }
